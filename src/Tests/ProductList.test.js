@@ -18,7 +18,6 @@ afterAll(() => {
 });
 
 test("renders and filters products", async () => {
-  // 1) Arrange: fake products and categories
   const products = [
     {
       id: 1,
@@ -31,12 +30,10 @@ test("renders and filters products", async () => {
   ];
   const categories = ["electronics"];
 
-  // 2) Mock fetch calls in order: first products, then categories
   global.fetch
     .mockResolvedValueOnce({ json: () => Promise.resolve(products) })
     .mockResolvedValueOnce({ json: () => Promise.resolve(categories) });
 
-  // 3) Render the component with redux and routing
   render(
     <Provider store={store}>
       <MemoryRouter>
@@ -45,11 +42,9 @@ test("renders and filters products", async () => {
     </Provider>
   );
 
-  // 4) Ensure product is shown after mock loads
   const product = await screen.findByText("Test Product");
   expect(product).toBeInTheDocument();
 
-  // 5) Simulate filtering by search
   fireEvent.change(screen.getByLabelText(/search/i), {
     target: { value: "Test" },
   });

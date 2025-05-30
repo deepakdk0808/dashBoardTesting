@@ -10,9 +10,6 @@ describe("favoritesSlice", () => {
 
   beforeEach(() => {
     initialState = { items: [] };
-    // // Optional: mock localStorage to prevent polluting test output
-    // Storage.prototype.setItem = jest.fn();
-    // Storage.prototype.getItem = jest.fn();
   });
 
   it("adds a favorite", () => {
@@ -23,7 +20,7 @@ describe("favoritesSlice", () => {
   it("does not add a duplicate favorite", () => {
     const preloaded = { items: [product] };
     const nextState = favoritesReducer(preloaded, addFavorite(product));
-    expect(nextState.items).toEqual([product]); // still just one
+    expect(nextState.items).toEqual([product]);
   });
 
   it("removes a favorite", () => {
